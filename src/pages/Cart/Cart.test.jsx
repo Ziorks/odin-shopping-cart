@@ -1,15 +1,16 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import Cart from "./Cart";
 
-describe("Test tests", () => {
-  it("true to be true", () => {
+describe("Cart unit tests", () => {
+  it("test test", () => {
     expect(true).toBe(true);
   });
 
   it("can test renders", () => {
-    const { container } = render(<div>Test div</div>);
+    const { container } = render(<Cart />);
 
     expect(container).toBeInTheDocument();
-    expect(container).toHaveTextContent("Test div");
+    expect(container).toHaveTextContent("Cart Page");
   });
 });
