@@ -1,5 +1,6 @@
 import Home from "./pages/Home/";
 import Shop from "./pages/Shop";
+import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Error from "./pages/Error";
 
@@ -10,11 +11,15 @@ const routes = [
     errorElement: <Error />,
   },
   {
-    path: "/shop",
+    path: "shop",
     element: <Shop />,
   },
   {
-    path: "/cart",
+    path: "shop/:product",
+    element: <Product />,
+  },
+  {
+    path: "cart",
     element: <Cart />,
   },
 ];
