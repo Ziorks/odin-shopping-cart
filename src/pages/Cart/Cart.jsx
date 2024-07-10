@@ -1,10 +1,11 @@
 import Navbar from "../../components/Navbar";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   return (
     <>
       <Navbar />
-      <div>Cart Page</div>
+      <div className={styles.container}>Cart Page</div>
     </>
   );
 };

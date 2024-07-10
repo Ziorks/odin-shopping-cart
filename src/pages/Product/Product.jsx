@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import styles from "./Product.module.css";
 
 const Product = () => {
   const { product } = useParams();
@@ -7,7 +8,7 @@ const Product = () => {
   return (
     <>
       <Navbar />
-      <div>Product Page product: {product}</div>;
+      <div className={styles.container}>Product Page product: {product}</div>;
     </>
   );
 };

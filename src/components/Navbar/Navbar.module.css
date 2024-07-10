@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.navbar {
+  background-color: black;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+}
+
+.home,
+.cart,
+.shop {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: white;
+  opacity: 0.8;
+}
+
+.home:hover,
+.cart:hover,
+.shop:hover {
+  opacity: 1;
+  transition: opacity 100ms ease-out;
+}
+
+.home {
+  transition: opacity 300ms ease-out;
+}
+
+.cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.nItems {
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 0.75rem;
+  position: absolute;
+  right: -10px;
+  bottom: -6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
