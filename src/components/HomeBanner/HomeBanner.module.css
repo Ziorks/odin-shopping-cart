@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+.homeBanner {
+  background-image: url("../../images/home_image.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  max-width: 600px;
+  padding-top: 2rem;
+}
+
+.button {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: white;
+  outline: 1px solid white;
+  padding: 0.5rem 1rem;
+}
+
+.button:hover {
+  outline: 2px solid white;
+}
