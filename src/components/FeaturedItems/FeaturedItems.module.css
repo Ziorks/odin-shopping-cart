@@ -1,0 +1,23 @@
+.featuredItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.heading {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 700px;
+  font-size: 2rem;
+}
+
+.heading::before,
+.heading::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: black;
+  opacity: 0.2;
+}
