@@ -8,7 +8,7 @@ const Product = () => {
   return (
     <>
       <Navbar />
-      <div className={styles.container}>Product Page product: {product}</div>;
+      <div className={styles.container}>Product Page product: {product}</div>
     </>
   );
 };

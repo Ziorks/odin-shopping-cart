@@ -11,18 +11,26 @@ const Shop = () => {
   return (
     <>
       <Navbar />
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : isError ? (
-        <div>There was an error.</div>
-      ) : (
-        <>
-          <div className={styles.container}>Shop Page</div>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product}></ProductCard>
-          ))}
-        </>
-      )}
+      <div className={styles.container}>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : isError ? (
+          <div>There was an error.</div>
+        ) : (
+          <>
+            <h2 className={styles.heading}>
+              Feast Your Eyes On These Bad Boys
+            </h2>
+            <ul className={styles.grid}>
+              {products.map((product) => (
+                <li key={product.id}>
+                  <ProductCard product={product}></ProductCard>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
     </>
   );
 };
