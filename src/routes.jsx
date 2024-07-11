@@ -1,4 +1,5 @@
-import Home from "./pages/Home/";
+import App from "./App";
+import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
@@ -7,20 +8,14 @@ import Error from "./pages/Error";
 const routes = [
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
     errorElement: <Error />,
-  },
-  {
-    path: "shop",
-    element: <Shop />,
-  },
-  {
-    path: "shop/:product",
-    element: <Product />,
-  },
-  {
-    path: "cart",
-    element: <Cart />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "shop", element: <Shop /> },
+      { path: "shop/:productId", element: <Product /> },
+      { path: "cart", element: <Cart /> },
+    ],
   },
 ];
 

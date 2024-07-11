@@ -1,11 +1,12 @@
-import Navbar from "../../components/Navbar";
 import styles from "./Error.module.css";
+
+import Navbar from "../../components/Navbar";
 
 const Error = () => {
   return (
     <>
       <Navbar />
-      <div className={styles.container}>Error Page</div>
+      <div className={styles.container}>Error Page</div>;
     </>
   );
 };
