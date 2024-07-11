@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  width: 150px;
+  outline: 1px solid black;
+}
+
+.incrementer {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.incrementer:disabled {
+  cursor: not-allowed;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  appearance: textfield;
+  border: none;
+  text-align: center;
+  width: 0;
+  flex: 1;
+}
+
+.input:focus {
+  outline: 2px solid black;
+  z-index: 1;
+}

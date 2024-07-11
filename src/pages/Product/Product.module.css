@@ -34,60 +34,17 @@
   margin-bottom: 25px;
 }
 
-.quantityContainer {
-  display: flex;
-  max-width: 150px;
-  outline: 1px solid black;
-  margin-bottom: 30px;
-}
-
-.incrementer,
 .addBtn {
   background-color: white;
   border: none;
   cursor: pointer;
   display: block;
-}
-
-.incrementer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.incrementer:disabled {
-  cursor: not-allowed;
-}
-
-.input::-webkit-outer-spin-button,
-.input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.input {
-  display: block;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.2rem;
-  appearance: textfield;
-  border: none;
-  text-align: center;
-  width: 0;
-  flex: 1;
-}
-
-.input:focus {
-  outline: 2px solid black;
-  z-index: 1;
-}
-
-.addBtn {
   outline: 1px solid black;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   width: 100%;
   padding: 10px 0;
+  margin-top: 30px;
 }
 
 .addBtn:hover {
