@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFetchSingleProduct } from "../../hooks";
 import styles from "./Product.module.css";
 import { useState } from "react";
@@ -8,10 +8,12 @@ const Product = () => {
   const { productId } = useParams();
   const { product, isLoading, isError } = useFetchSingleProduct(productId);
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //Todo: add quantity of product to cart state
+    navigate("/cart");
   };
 
   if (isLoading) {
