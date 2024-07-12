@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useFetchSingleProduct } from "../../hooks";
 import styles from "./Product.module.css";
 import { useState } from "react";
@@ -8,12 +8,25 @@ const Product = () => {
   const { productId } = useParams();
   const { product, isLoading, isError } = useFetchSingleProduct(productId);
   const [quantity, setQuantity] = useState(1);
+  const { handleAdd } = useOutletContext();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //Todo: add quantity of product to cart state
+    handleAdd(quantity, product);
     navigate("/cart");
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    setQuantity((prev) => prev - 1);
+  };
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
   };
 
   if (isLoading) {
@@ -37,7 +50,12 @@ const Product = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="quantity">Quantity</label>
-            <QuantityInput quantity={quantity} setQuantity={setQuantity} />
+            <QuantityInput
+              quantity={quantity}
+              handleDecrement={handleDecrement}
+              handleIncrement={handleIncrement}
+              handleQuantityChange={handleQuantityChange}
+            />
           </div>
           <button type="submit" className={styles.addBtn}>
             Add to cart

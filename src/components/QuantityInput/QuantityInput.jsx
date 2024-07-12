@@ -2,10 +2,15 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import PropTypes from "prop-types";
 import styles from "./QuantityInput.module.css";
 
-const QuantityInput = ({ quantity, setQuantity }) => {
+const QuantityInput = ({
+  quantity,
+  handleIncrement,
+  handleDecrement,
+  handleQuantityChange,
+}) => {
   const handleChange = (e) => {
     if (+e.target.value > 0) {
-      setQuantity(e.target.value);
+      handleQuantityChange(+e.target.value);
     }
   };
 
@@ -14,8 +19,9 @@ const QuantityInput = ({ quantity, setQuantity }) => {
       <button
         type="button"
         disabled={quantity < 2}
-        onClick={() => setQuantity((prev) => prev - 1)}
-        className={styles.incrementer}>
+        onClick={handleDecrement}
+        className={styles.incrementer}
+      >
         <FaMinus />
       </button>
       <input
@@ -30,8 +36,9 @@ const QuantityInput = ({ quantity, setQuantity }) => {
       />
       <button
         type="button"
-        onClick={() => setQuantity((prev) => prev + 1)}
-        className={styles.incrementer}>
+        onClick={handleIncrement}
+        className={styles.incrementer}
+      >
         <FaPlus />
       </button>
     </div>
@@ -39,8 +46,10 @@ const QuantityInput = ({ quantity, setQuantity }) => {
 };
 
 QuantityInput.propTypes = {
-  quantity: PropTypes.number,
-  setQuantity: PropTypes.func,
+  quantity: PropTypes.number.isRequired,
+  handleIncrement: PropTypes.func.isRequired,
+  handleDecrement: PropTypes.func.isRequired,
+  handleQuantityChange: PropTypes.func.isRequired,
 };
 
 export default QuantityInput;

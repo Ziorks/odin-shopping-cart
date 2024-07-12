@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
 import styles from "./Navbar.module.css";
 
-const Navbar = () => {
-  const nItems = 10;
-
+const Navbar = ({ nCartItems }) => {
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles.home}>
@@ -15,8 +13,10 @@ const Navbar = () => {
       </Link>
       <Link to="/cart" className={styles.cart}>
         <TiShoppingCart />
-        {nItems > 0 && (
-          <div className={styles.nItems}>{nItems < 100 ? nItems : "99+"}</div>
+        {nCartItems > 0 && (
+          <div className={styles.nItems}>
+            {nCartItems < 100 ? nCartItems : "99+"}
+          </div>
         )}
       </Link>
     </nav>

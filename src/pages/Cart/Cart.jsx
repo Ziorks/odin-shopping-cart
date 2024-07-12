@@ -1,35 +1,21 @@
 // import styles from "./Cart.module.css";
 
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "./Cart.module.css";
 import QuantityInput from "../../components/QuantityInput";
 import { FaTrash } from "react-icons/fa";
 
-const testCart = [
-  {
-    quantity: 2,
-    product: {
-      id: 1,
-      price: 22.9,
-      title: "Cool Clothes",
-      image:
-        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-    },
-  },
-  {
-    quantity: 1,
-    product: {
-      id: 1,
-      price: 12.99,
-      title: "Gaming PC",
-      image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
-    },
-  },
-];
+const Cart = () => {
+  const {
+    cart,
+    handleRemove,
+    handleIncrement,
+    handleDecrement,
+    handleQuantityChange,
+  } = useOutletContext();
 
-const Cart = ({ cartItems = testCart }) => {
-  if (cartItems.length < 1) {
+  if (cart.length < 1) {
     return (
       <div className={styles.container}>
         <p className={styles.emptyMessage}>Your cart is empty</p>
@@ -58,9 +44,9 @@ const Cart = ({ cartItems = testCart }) => {
             </tr>
           </thead>
           <tbody className={styles.tableBody}>
-            {cartItems.map((item) => {
-              const quantity = item.quantity;
-              const { id, price, title, image } = item.product;
+            {cart.map((cartItem) => {
+              const quantity = cartItem.quantity;
+              const { id, price, title, image } = cartItem.product;
 
               return (
                 <tr key={id} className={styles.cartItem}>
@@ -79,10 +65,19 @@ const Cart = ({ cartItems = testCart }) => {
                     <div className={styles.quantity}>
                       <QuantityInput
                         quantity={quantity}
-                        setQuantity={() => {}}
+                        handleDecrement={() => handleDecrement(id)}
+                        handleIncrement={() => handleIncrement(id)}
+                        handleQuantityChange={(newQuantity) =>
+                          handleQuantityChange(id, newQuantity)
+                        }
                       />
-                      {/*TODO: wire this up with state and state setter*/}
-                      <FaTrash />
+                      <button
+                        type="button"
+                        onClick={() => handleRemove(id)}
+                        className={styles.remove}
+                      >
+                        <FaTrash />
+                      </button>
                     </div>
                   </td>
                   <td>
@@ -99,9 +94,10 @@ const Cart = ({ cartItems = testCart }) => {
           Estimated total
           <span>
             $
-            {cartItems
+            {cart
               .reduce(
-                (accum, item) => accum + item.product.price * item.quantity,
+                (accum, cartItem) =>
+                  accum + cartItem.product.price * cartItem.quantity,
                 0
               )
               .toFixed(2)}
