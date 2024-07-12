@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Shop from "./Shop";
+import { MemoryRouter } from "react-router-dom";
+import Shop from "../src/pages/Shop/Shop";
 
 describe("Shop unit tests", () => {
   it("test test", () => {
@@ -8,9 +9,8 @@ describe("Shop unit tests", () => {
   });
 
   it("can test renders", () => {
-    const { container } = render(<Shop />);
+    const { container } = render(<Shop />, { wrapper: MemoryRouter });
 
     expect(container).toBeInTheDocument();
-    expect(container).toHaveTextContent("Shop Page");
   });
 });

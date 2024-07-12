@@ -1,16 +1,15 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import ProductCard from "./ProductCard";
+import FeaturedItems from "../src/components/FeaturedItems/FeaturedItems";
 
-describe("ProductCard unit tests", () => {
+describe("FeaturedItems unit tests", () => {
   it("test test", () => {
     expect(true).toBe(true);
   });
 
   it("can test renders", () => {
-    const { container } = render(<ProductCard />);
+    const { container } = render(<FeaturedItems />);
 
     expect(container).toBeInTheDocument();
-    expect(container).toHaveTextContent("Product Card");
   });
 });

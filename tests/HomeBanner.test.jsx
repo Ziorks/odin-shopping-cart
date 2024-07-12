@@ -1,16 +1,16 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Cart from "./Cart";
+import HomeBanner from "../src/components/HomeBanner/HomeBanner";
+import { MemoryRouter } from "react-router-dom";
 
-describe("Cart unit tests", () => {
+describe("HomeBanner unit tests", () => {
   it("test test", () => {
     expect(true).toBe(true);
   });
 
   it("can test renders", () => {
-    const { container } = render(<Cart />);
+    const { container } = render(<HomeBanner />, { wrapper: MemoryRouter });
 
     expect(container).toBeInTheDocument();
-    expect(container).toHaveTextContent("Cart Page");
   });
 });
