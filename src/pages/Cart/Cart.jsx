@@ -5,7 +5,6 @@ import { Link, useOutletContext } from "react-router-dom";
 import styles from "./Cart.module.css";
 import QuantityInput from "../../components/QuantityInput";
 import { FaTrash } from "react-icons/fa";
-import { useFetchMultipleProducts } from "../../hooks";
 
 const Cart = () => {
   const {
@@ -15,9 +14,6 @@ const Cart = () => {
     handleDecrement,
     handleQuantityChange,
   } = useOutletContext();
-  const { products, isLoading, isError } = useFetchMultipleProducts(
-    cart.map((cartItem) => cartItem.id)
-  );
 
   if (cart.length < 1) {
     return (
@@ -28,14 +24,6 @@ const Cart = () => {
         </Link>
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>There was an error</div>;
   }
 
   return (
@@ -56,11 +44,8 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody className={styles.tableBody}>
-            {products.map((product) => {
-              const { id, price, title, image } = product;
-              const quantity = cart.find(
-                (cartItem) => cartItem.id === product.id
-              ).quantity;
+            {cart.map((cartItem) => {
+              const { id, price, title, image, quantity } = cartItem;
 
               return (
                 <tr key={id} className={styles.cartItem}>
@@ -107,13 +92,9 @@ const Cart = () => {
           Estimated total
           <span>
             $
-            {products
+            {cart
               .reduce(
-                (accum, product) =>
-                  accum +
-                  product.price *
-                    cart.find((cartItem) => cartItem.id === product.id)
-                      .quantity,
+                (accum, cartItem) => accum + cartItem.quantity * cartItem.price,
                 0
               )
               .toFixed(2)}

@@ -9,12 +9,12 @@ const App = () => {
     0
   );
 
-  const handleAdd = (quantity, id) => {
+  const handleAdd = (product, quantity) => {
     let isAdded = false;
 
     setCart((prevCart) => {
       const newCart = prevCart.map((cartItem) => {
-        if (cartItem.id === id) {
+        if (cartItem.id === product.id) {
           isAdded = true;
           return { ...cartItem, quantity: cartItem.quantity + quantity };
         }
@@ -25,7 +25,7 @@ const App = () => {
         return newCart;
       }
 
-      return [...prevCart, { quantity, id }];
+      return [...prevCart, { ...product, quantity }];
     });
   };
 

@@ -1,11 +1,30 @@
 import styles from "./FeaturedItems.module.css";
 import ProductCard from "../ProductCard";
-import { useFetchMultipleProducts } from "../../hooks";
+import { useFetchAllProducts } from "../../hooks";
 
 const FeaturedItems = () => {
-  const { products, isLoading, isError } = useFetchMultipleProducts([
-    2, 8, 14, 17,
-  ]);
+  const { data, isLoading, isError } = useFetchAllProducts();
+  const featuredItemIds = [5, 8, 14, 18];
+
+  const Items = () => {
+    const featuredItems = data.filter((item) =>
+      featuredItemIds.includes(item.id)
+    );
+
+    return (
+      <ul className={styles.grid}>
+        {featuredItems.length > 0 ? (
+          featuredItems.map((item) => (
+            <li key={item.id}>
+              <ProductCard product={item} />
+            </li>
+          ))
+        ) : (
+          <p>There&apos;s nothing here</p>
+        )}
+      </ul>
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -15,17 +34,7 @@ const FeaturedItems = () => {
       ) : isError ? (
         <div>There was an error</div>
       ) : (
-        <ul className={styles.grid}>
-          {products.length > 0 ? (
-            products.map((item) => (
-              <li key={item.id}>
-                <ProductCard product={item} />
-              </li>
-            ))
-          ) : (
-            <p>There&apos;s nothing here</p>
-          )}
-        </ul>
+        <Items />
       )}
     </div>
   );

@@ -1,19 +1,19 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { useFetchSingleProduct } from "../../hooks";
+import { useFetchProduct } from "../../hooks";
 import styles from "./Product.module.css";
 import { useState } from "react";
 import QuantityInput from "../../components/QuantityInput";
 
 const Product = () => {
   const { productId } = useParams();
-  const { product, isLoading, isError } = useFetchSingleProduct(productId);
+  const { data, isLoading, isError } = useFetchProduct(productId);
   const [quantity, setQuantity] = useState(1);
   const { handleAdd } = useOutletContext();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(quantity, product.id);
+    handleAdd(data, quantity);
     navigate("/cart");
   };
 
@@ -37,16 +37,18 @@ const Product = () => {
     return <div>There was an error.</div>;
   }
 
+  const { image, title, rating, description, price } = data;
+
   return (
     <div className={styles.container}>
-      <img src={product.image} alt={product.title} className={styles.image} />
+      <img src={image} alt={title} className={styles.image} />
       <div className={styles.panel}>
-        <h2 className={styles.title}>{product.title}</h2>
+        <h2 className={styles.title}>{title}</h2>
         <p className={styles.rating}>
-          Rated {product.rating.rate} of 5 by {product.rating.count} users
+          Rated {rating.rate} of 5 by {rating.count} users
         </p>
-        <p className={styles.price}>${product.price.toFixed(2)}</p>
-        <p className={styles.description}>{product.description}</p>
+        <p className={styles.price}>${price.toFixed(2)}</p>
+        <p className={styles.description}>{description}</p>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="quantity">Quantity</label>
