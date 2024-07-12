@@ -1,11 +1,15 @@
+.container {
+  max-width: 1000px;
+  padding: 50px 20px;
+  margin: 0 auto;
+}
+
 .heading {
   display: flex;
   gap: 1rem;
   align-items: center;
-  padding-top: 50px;
-  margin: 0 auto;
-  width: 1000px;
   font-size: 2rem;
+  text-align: center;
 }
 
 .heading::before,
@@ -13,6 +17,7 @@
   content: "";
   flex: 1;
   height: 2px;
+  min-width: 50px;
   background-color: black;
   opacity: 0.2;
 }
@@ -20,9 +25,13 @@
 .grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  max-width: 1000px;
-  margin: 0 auto;
   padding: 50px 0;
+}
+
+@media (width > 800px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

@@ -31,7 +31,7 @@ const testCart = [
 const Cart = ({ cartItems = testCart }) => {
   if (cartItems.length < 1) {
     return (
-      <div className={styles.emptyContainer}>
+      <div className={styles.container}>
         <p className={styles.emptyMessage}>Your cart is empty</p>
         <Link to="/shop" className={styles.emptyLink}>
           Continue shopping

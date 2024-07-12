@@ -14,7 +14,7 @@ const Shop = () => {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <h2 className={styles.heading}>Feast Your Eyes On These Bad Boys</h2>
       <ul className={styles.grid}>
         {products.map((product) => (
@@ -23,7 +23,7 @@ const Shop = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

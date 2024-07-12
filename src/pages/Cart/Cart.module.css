@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-.emptyContainer {
-  padding: 4rem 0;
-  text-align: center;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 20px;
   font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 
 .emptyMessage {
@@ -22,13 +24,6 @@
 .emptyLink:hover,
 .checkout:hover {
   outline: 1px solid black;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 4rem 0;
-  font-family: "Poppins", sans-serif;
 }
 
 .header {

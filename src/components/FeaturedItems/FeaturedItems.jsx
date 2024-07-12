@@ -4,13 +4,15 @@ import ProductCard from "../ProductCard";
 
 const FeaturedItems = ({ items = [] }) => {
   return (
-    <div className={styles.featuredItems}>
+    <div className={styles.container}>
       <h3 className={styles.heading}>FEATURED ITEMS</h3>
-      {items.length > 0 ? (
-        items.map((item) => <ProductCard key={item.id} product={item} />)
-      ) : (
-        <p>There&apos;s nothing here</p>
-      )}
+      <div className={styles.items}>
+        {items.length > 0 ? (
+          items.map((item) => <ProductCard key={item.id} product={item} />)
+        ) : (
+          <p>There&apos;s nothing here</p>
+        )}
+      </div>
     </div>
   );
 };

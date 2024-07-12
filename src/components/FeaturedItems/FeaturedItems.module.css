@@ -1,16 +1,16 @@
-.featuredItems {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
+.container {
+  padding: 50px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .heading {
   display: flex;
   gap: 1rem;
   align-items: center;
-  width: 700px;
+  text-align: center;
   font-size: 2rem;
+  margin-bottom: 30px;
 }
 
 .heading::before,
@@ -20,4 +20,8 @@
   height: 2px;
   background-color: black;
   opacity: 0.2;
+}
+
+.items {
+  text-align: center;
 }
