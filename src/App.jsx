@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
+import { useFetchAllProducts } from "./hooks";
 
 const App = () => {
+  const { data, isLoading, isError } = useFetchAllProducts();
   const [cart, setCart] = useState([]);
   const nCartItems = cart.reduce(
     (accum, cartItem) => accum + cartItem.quantity,
@@ -70,16 +72,23 @@ const App = () => {
     <>
       <Navbar nCartItems={nCartItems} />
       <div className="content">
-        <Outlet
-          context={{
-            cart,
-            handleAdd,
-            handleRemove,
-            handleIncrement,
-            handleDecrement,
-            handleQuantityChange,
-          }}
-        />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : isError ? (
+          <div>There was an error. Try reloading</div>
+        ) : (
+          <Outlet
+            context={{
+              data,
+              cart,
+              handleAdd,
+              handleRemove,
+              handleIncrement,
+              handleDecrement,
+              handleQuantityChange,
+            }}
+          />
+        )}
       </div>
     </>
   );

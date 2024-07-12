@@ -1,19 +1,18 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { useFetchProduct } from "../../hooks";
-import styles from "./Product.module.css";
 import { useState } from "react";
+import styles from "./Product.module.css";
 import QuantityInput from "../../components/QuantityInput";
 
 const Product = () => {
   const { productId } = useParams();
-  const { data, isLoading, isError } = useFetchProduct(productId);
   const [quantity, setQuantity] = useState(1);
-  const { handleAdd } = useOutletContext();
+  const { data, handleAdd } = useOutletContext();
   const navigate = useNavigate();
+  const product = data.find((product) => product.id === +productId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(data, quantity);
+    handleAdd(product, quantity);
     navigate("/cart");
   };
 
@@ -29,15 +28,7 @@ const Product = () => {
     setQuantity(newQuantity);
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>There was an error.</div>;
-  }
-
-  const { image, title, rating, description, price } = data;
+  const { image, title, rating, description, price } = product;
 
   return (
     <div className={styles.container}>

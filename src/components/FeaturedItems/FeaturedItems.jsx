@@ -1,17 +1,17 @@
 import styles from "./FeaturedItems.module.css";
 import ProductCard from "../ProductCard";
-import { useFetchAllProducts } from "../../hooks";
+import { useOutletContext } from "react-router-dom";
 
 const FeaturedItems = () => {
-  const { data, isLoading, isError } = useFetchAllProducts();
+  const { data } = useOutletContext();
   const featuredItemIds = [5, 8, 14, 18];
+  const featuredItems = data.filter((item) =>
+    featuredItemIds.includes(item.id)
+  );
 
-  const Items = () => {
-    const featuredItems = data.filter((item) =>
-      featuredItemIds.includes(item.id)
-    );
-
-    return (
+  return (
+    <div className={styles.container}>
+      <h3 className={styles.heading}>FEATURED ITEMS</h3>
       <ul className={styles.grid}>
         {featuredItems.length > 0 ? (
           featuredItems.map((item) => (
@@ -23,19 +23,6 @@ const FeaturedItems = () => {
           <p>There&apos;s nothing here</p>
         )}
       </ul>
-    );
-  };
-
-  return (
-    <div className={styles.container}>
-      <h3 className={styles.heading}>FEATURED ITEMS</h3>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : isError ? (
-        <div>There was an error</div>
-      ) : (
-        <Items />
-      )}
     </div>
   );
 };

@@ -1,17 +1,9 @@
-import { useFetchAllProducts } from "../../hooks";
 import ProductCard from "../../components/ProductCard";
 import styles from "./Shop.module.css";
+import { useOutletContext } from "react-router-dom";
 
 const Shop = () => {
-  const { data, isLoading, isError } = useFetchAllProducts();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>There was an error.</div>;
-  }
+  const { data } = useOutletContext();
 
   return (
     <div className={styles.container}>
