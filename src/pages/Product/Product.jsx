@@ -13,7 +13,7 @@ const Product = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(quantity, product);
+    handleAdd(quantity, product.id);
     navigate("/cart");
   };
 

@@ -9,13 +9,12 @@ const App = () => {
     0
   );
 
-  const handleAdd = (quantity, product) => {
+  const handleAdd = (quantity, id) => {
     let isAdded = false;
-    const { id } = product;
 
     setCart((prevCart) => {
       const newCart = prevCart.map((cartItem) => {
-        if (cartItem.product.id === id) {
+        if (cartItem.id === id) {
           isAdded = true;
           return { ...cartItem, quantity: cartItem.quantity + quantity };
         }
@@ -26,20 +25,18 @@ const App = () => {
         return newCart;
       }
 
-      return [...prevCart, { quantity, product }];
+      return [...prevCart, { quantity, id }];
     });
   };
 
   const handleRemove = (id) => {
-    setCart((prevCart) =>
-      prevCart.filter((cartItem) => cartItem.product.id !== id)
-    );
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== id));
   };
 
   const handleIncrement = (id) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) => {
-        if (cartItem.product.id === id) {
+        if (cartItem.id === id) {
           return { ...cartItem, quantity: cartItem.quantity + 1 };
         }
         return cartItem;
@@ -50,7 +47,7 @@ const App = () => {
   const handleDecrement = (id) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) => {
-        if (cartItem.product.id === id) {
+        if (cartItem.id === id) {
           return { ...cartItem, quantity: cartItem.quantity - 1 };
         }
         return cartItem;
@@ -61,7 +58,7 @@ const App = () => {
   const handleQuantityChange = (id, newQuantity) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) => {
-        if (cartItem.product.id === id) {
+        if (cartItem.id === id) {
           return { ...cartItem, quantity: newQuantity };
         }
         return cartItem;

@@ -1,5 +1,53 @@
 import { useEffect, useState } from "react";
 
+const fetchProduct = async (id) => {
+  try {
+    const resp = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      mode: "cors",
+    });
+    if (!resp.ok) {
+      throw new Error("server error");
+    }
+    const data = await resp.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const useFetchMultipleProducts = (productIds) => {
+  const [products, setProducts] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    let ignore = false;
+
+    const fetchProducts = async () => {
+      const promises = [];
+      productIds.forEach((id) => promises.push(fetchProduct(id)));
+      try {
+        const fetchedProducts = await Promise.all(promises);
+        if (!ignore) {
+          setProducts(fetchedProducts);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        setIsError(true);
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+
+    return () => {
+      ignore = true;
+    };
+  }, [productIds]);
+
+  return { products, isLoading, isError };
+};
+
 export const useFetchSingleProduct = (productId) => {
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,18 +58,9 @@ export const useFetchSingleProduct = (productId) => {
 
     const getProduct = async () => {
       try {
-        const resp = await fetch(
-          `https://fakestoreapi.com/products/${productId}`,
-          {
-            mode: "cors",
-          }
-        );
-        if (!resp.ok) {
-          throw new Error("server error");
-        }
-        const data = await resp.json();
+        const fetchedProduct = await fetchProduct(productId);
         if (!ignore) {
-          setProduct(data);
+          setProduct(fetchedProduct);
           setIsLoading(false);
         }
       } catch (error) {
@@ -35,7 +74,7 @@ export const useFetchSingleProduct = (productId) => {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [productId]);
 
   return { product, isLoading, isError };
 };
