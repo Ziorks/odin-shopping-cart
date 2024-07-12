@@ -1,31 +1,34 @@
-import PropTypes from "prop-types";
 import styles from "./FeaturedItems.module.css";
 import ProductCard from "../ProductCard";
+import { useFetchMultipleProducts } from "../../hooks";
 
-const FeaturedItems = ({ items = [] }) => {
+const FeaturedItems = () => {
+  const { products, isLoading, isError } = useFetchMultipleProducts([
+    2, 8, 14, 17,
+  ]);
+
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>FEATURED ITEMS</h3>
-      <div className={styles.items}>
-        {items.length > 0 ? (
-          items.map((item) => <ProductCard key={item.id} product={item} />)
-        ) : (
-          <p>There&apos;s nothing here</p>
-        )}
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : isError ? (
+        <div>There was an error</div>
+      ) : (
+        <ul className={styles.grid}>
+          {products.length > 0 ? (
+            products.map((item) => (
+              <li key={item.id}>
+                <ProductCard product={item} />
+              </li>
+            ))
+          ) : (
+            <p>There&apos;s nothing here</p>
+          )}
+        </ul>
+      )}
     </div>
   );
-};
-
-FeaturedItems.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      image: PropTypes.string,
-      price: PropTypes.number,
-      title: PropTypes.string,
-    })
-  ),
 };
 
 export default FeaturedItems;
