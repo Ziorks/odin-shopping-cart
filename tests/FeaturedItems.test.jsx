@@ -1,6 +1,13 @@
 import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import FeaturedItems from "../src/components/FeaturedItems/FeaturedItems";
+
+vi.mock("react-router-dom", async () => {
+  return {
+    ...(await vi.importActual("react-router-dom")),
+    useOutletContext: () => ({ data: [] }),
+  };
+});
 
 describe("FeaturedItems unit tests", () => {
   it("test test", () => {

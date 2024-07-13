@@ -10,7 +10,12 @@ describe("QuantityInput unit tests", () => {
 
   it("can test renders", () => {
     const { container } = render(
-      <QuantityInput quantity={1} setQuantity={() => {}} />,
+      <QuantityInput
+        quantity={1}
+        handleIncrement={() => {}}
+        handleDecrement={() => {}}
+        handleQuantityChange={() => {}}
+      />,
       {
         wrapper: MemoryRouter,
       }
