@@ -13,7 +13,14 @@ const Cart = () => {
     handleIncrement,
     handleDecrement,
     handleQuantityChange,
+    handleClear,
   } = useOutletContext();
+
+  const handleCheckout = () => {
+    //send cart somewhere? idk
+    alert("Your order has been submitted.  Thanks! (not really, haha lol xd)");
+    handleClear();
+  };
 
   if (cart.length < 1) {
     return (
@@ -34,7 +41,7 @@ const Cart = () => {
           Continue shopping
         </Link>
       </div>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form>
         <table className={styles.table}>
           <thead>
             <tr className={styles.tableHeadings}>
@@ -73,7 +80,8 @@ const Cart = () => {
                       <button
                         type="button"
                         onClick={() => handleRemove(id)}
-                        className={styles.remove}>
+                        className={styles.remove}
+                      >
                         <FaTrash />
                       </button>
                     </div>
@@ -103,7 +111,11 @@ const Cart = () => {
         <p className={styles.additionalCosts}>
           Taxes, Discounts, and shipping calculated at checkout
         </p>
-        <button type="submit" className={styles.checkout}>
+        <button
+          type="button"
+          onClick={handleCheckout}
+          className={styles.checkout}
+        >
           Checkout
         </button>
       </div>

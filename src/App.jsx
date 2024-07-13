@@ -68,6 +68,10 @@ const App = () => {
     );
   };
 
+  const handleClear = () => {
+    setCart([]);
+  };
+
   return (
     <>
       <Navbar nCartItems={nCartItems} />
@@ -86,6 +90,7 @@ const App = () => {
               handleIncrement,
               handleDecrement,
               handleQuantityChange,
+              handleClear,
             }}
           />
         )}
