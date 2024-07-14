@@ -78,6 +78,7 @@ const Cart = () => {
                       />
                       <button
                         type="button"
+                        aria-label="remove"
                         onClick={() => handleRemove(id)}
                         className={styles.remove}
                       >

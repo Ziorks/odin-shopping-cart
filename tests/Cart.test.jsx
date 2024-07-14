@@ -102,30 +102,105 @@ describe("Cart", () => {
         expect(rows).toHaveLength(2);
       });
 
-      it.todo(
-        "should render an img using image for src and title for alt",
-        () => {}
-      );
+      it("should render an img using image for src and title for alt", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
 
-      it.todo("should render the products title", () => {});
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const img = within(firstDataRow).getByRole("img");
 
-      it.todo("should render the products price in the form '$X.XX'", () => {});
+        expect(img).toHaveAttribute("src", testData[0].image);
+        expect(img).toHaveAttribute("alt", testData[0].title);
+      });
 
-      it.todo(
-        "should render at least one link to '/shop/<productId>'",
-        () => {}
-      );
+      it("should render the products title", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
 
-      it.todo("should render a remove button", () => {});
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const title = within(firstDataRow).getByText(testData[0].title);
 
-      it.todo("should run handleRemove when clicked", () => {});
+        expect(title).toBeInTheDocument();
+      });
 
-      it.todo("should not run handleRemove if not clicked", () => {});
+      it("should render the products price in the form '$X.XX'", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
 
-      it.todo(
-        "should render total price (price*quantity) in the form '$X.XX'",
-        () => {}
-      );
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const price = within(firstDataRow).getByText("$2.00");
+
+        expect(price).toBeInTheDocument();
+      });
+
+      it("should render at least one link to '/shop/<productId>'", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
+
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const links = within(firstDataRow).getAllByRole("link");
+
+        expect(...links).any.toHaveAttribute("href", "/shop/1");
+        expect(...links).toBeInTheDocument();
+      });
+
+      it("should render a remove button", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
+
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const button = within(firstDataRow).getByRole("button", {
+          name: "remove",
+        });
+
+        expect(button).toBeInTheDocument();
+      });
+
+      it("should run handleRemove when clicked", async () => {
+        const user = userEvent.setup();
+        useOutletContext.mockReturnValue({ cart: testData, handleRemove });
+        render(<Cart />, { wrapper: MemoryRouter });
+
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const button = within(firstDataRow).getByRole("button", {
+          name: "remove",
+        });
+
+        await user.click(button);
+
+        expect(handleRemove.mock.calls).toHaveLength(1);
+      });
+
+      it("should not run handleRemove if not clicked", () => {
+        useOutletContext.mockReturnValue({ cart: testData, handleRemove });
+        render(<Cart />, { wrapper: MemoryRouter });
+
+        expect(handleRemove.mock.calls).toHaveLength(0);
+      });
+
+      it("should render a cell with total price (price*quantity) in the form '$X.XX'", () => {
+        useOutletContext.mockReturnValue({ cart: testData });
+        render(<Cart />, { wrapper: MemoryRouter });
+
+        const table = screen.getByRole("table");
+        const rows = within(table).getAllByRole("row");
+        const firstDataRow = rows[1];
+        const total = within(firstDataRow).getByRole("cell", { name: "$6.00" });
+
+        expect(total).toBeInTheDocument();
+      });
     });
 
     describe("Footer", () => {
