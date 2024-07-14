@@ -40,7 +40,7 @@ const Product = () => {
         </p>
         <p className={styles.price}>${price.toFixed(2)}</p>
         <p className={styles.description}>{description}</p>
-        <form onSubmit={handleSubmit}>
+        <form aria-label="addToCart" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="quantity">Quantity</label>
             <QuantityInput

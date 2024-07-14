@@ -1,10 +1,9 @@
 // import styles from "./Cart.module.css";
 
-import PropTypes from "prop-types";
 import { Link, useOutletContext } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 import styles from "./Cart.module.css";
 import QuantityInput from "../../components/QuantityInput";
-import { FaTrash } from "react-icons/fa";
 
 const Cart = () => {
   const {
@@ -121,20 +120,6 @@ const Cart = () => {
       </div>
     </div>
   );
-};
-
-Cart.propTypes = {
-  cartItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      quantity: PropTypes.number,
-      product: PropTypes.shape({
-        id: PropTypes.number,
-        image: PropTypes.string,
-        title: PropTypes.string,
-        price: PropTypes.number,
-      }),
-    })
-  ),
 };
 
 export default Cart;
