@@ -63,7 +63,7 @@ describe("Product", () => {
     it("should display the product price in the form '$X.XX'", () => {
       render(<Product />, { wrapper: MemoryRouter });
 
-      const price = screen.getByText(`$${testData[0].price.toFixed(2)}`);
+      const price = screen.getByText("$3.00");
 
       expect(price).toBeInTheDocument();
     });

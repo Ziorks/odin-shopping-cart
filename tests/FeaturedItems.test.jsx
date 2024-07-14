@@ -10,11 +10,10 @@ vi.mock("react-router-dom", async () => {
       data: [
         {
           id: 1,
-          title: "...",
-          price: 1,
-          category: "...",
-          description: "...",
-          image: "...",
+          title: "title",
+          price: 2,
+          description: "description",
+          image: "image",
         },
       ],
     }),

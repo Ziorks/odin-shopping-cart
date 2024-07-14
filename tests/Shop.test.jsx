@@ -6,11 +6,10 @@ import Shop from "../src/pages/Shop/Shop";
 const testData = [
   {
     id: 1,
-    title: "...",
-    price: 1,
-    category: "...",
-    description: "...",
-    image: "...",
+    title: "title",
+    price: 2,
+    description: "description",
+    image: "image",
   },
 ];
 

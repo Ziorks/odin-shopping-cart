@@ -5,9 +5,9 @@ import ProductCard from "../src/components/ProductCard/ProductCard";
 
 const testProduct = {
   id: 1,
-  image: "",
+  image: "image",
   price: 4.5,
-  title: "Example Product",
+  title: "title",
 };
 
 describe("ProductCard", () => {
@@ -39,7 +39,7 @@ describe("ProductCard", () => {
   it("should display the price in the form '$X.XX'", () => {
     render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
 
-    const price = screen.getByText(`$${testProduct.price.toFixed(2)}`);
+    const price = screen.getByText("$4.50");
 
     expect(price).toBeInTheDocument();
   });
