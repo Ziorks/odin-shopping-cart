@@ -1,7 +1,7 @@
 import styles from "./Error.module.css";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 import { FaRegSadCry } from "react-icons/fa";
+import Navbar from "../../components/Navbar";
 
 const Error = () => {
   return (

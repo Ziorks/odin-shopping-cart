@@ -20,8 +20,8 @@ const QuantityInput = ({
         type="button"
         disabled={quantity < 2}
         onClick={handleDecrement}
-        className={styles.incrementer}
-      >
+        aria-label="decrement"
+        className={styles.incrementer}>
         <FaMinus />
       </button>
       <input
@@ -37,8 +37,8 @@ const QuantityInput = ({
       <button
         type="button"
         onClick={handleIncrement}
-        className={styles.incrementer}
-      >
+        aria-label="increment"
+        className={styles.incrementer}>
         <FaPlus />
       </button>
     </div>

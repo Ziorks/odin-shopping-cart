@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <HomeBanner />
-      <FeaturedItems />
+      <FeaturedItems itemIds={[5, 8, 14, 18]} />
     </>
   );
 };

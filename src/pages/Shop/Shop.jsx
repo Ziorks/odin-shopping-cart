@@ -9,11 +9,15 @@ const Shop = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Feast Your Eyes On These Bad Boys</h2>
       <ul className={styles.grid}>
-        {data.map((product) => (
-          <li key={product.id}>
-            <ProductCard product={product}></ProductCard>
-          </li>
-        ))}
+        {data.length > 0 ? (
+          data.map((product) => (
+            <li key={product.id}>
+              <ProductCard product={product}></ProductCard>
+            </li>
+          ))
+        ) : (
+          <p>There&apos;s nothing here</p>
+        )}
       </ul>
     </div>
   );

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
+import PropTypes from "prop-types";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({ nCartItems }) => {
@@ -21,6 +22,10 @@ const Navbar = ({ nCartItems }) => {
       </Link>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  nCartItems: PropTypes.number.isRequired,
 };
 
 export default Navbar;

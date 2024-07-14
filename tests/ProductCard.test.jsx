@@ -1,25 +1,46 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import ProductCard from "../src/components/ProductCard/ProductCard";
 
-describe("ProductCard unit tests", () => {
-  it("test test", () => {
-    expect(true).toBe(true);
+const testProduct = {
+  id: 1,
+  image: "",
+  price: 4.5,
+  title: "Example Product",
+};
+
+describe("ProductCard", () => {
+  it("should render a link to '/shop/<productId>'", () => {
+    render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
+
+    const link = screen.getByRole("link");
+
+    expect(link).toHaveAttribute("href", `/shop/${testProduct.id}`);
   });
 
-  it("can test renders", () => {
-    const testProduct = {
-      id: 1,
-      image: "",
-      price: 4.5,
-      title: "Example Product",
-    };
+  it("should render an img with image as src and title as alt", () => {
+    render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
 
-    const { container } = render(<ProductCard product={testProduct} />, {
-      wrapper: MemoryRouter,
-    });
+    const image = screen.getByRole("img");
 
-    expect(container).toBeInTheDocument();
+    expect(image).toHaveAttribute("src", testProduct.image);
+    expect(image).toHaveAttribute("alt", testProduct.title);
+  });
+
+  it("should display the title", () => {
+    render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
+
+    const title = screen.getByText(testProduct.title);
+
+    expect(title).toBeInTheDocument();
+  });
+
+  it("should display the the price in the form '$X.XX'", () => {
+    render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
+
+    const price = screen.getByText(`$${testProduct.price.toFixed(2)}`);
+
+    expect(price).toBeInTheDocument();
   });
 });

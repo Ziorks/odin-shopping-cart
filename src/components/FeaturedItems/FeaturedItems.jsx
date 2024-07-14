@@ -1,13 +1,11 @@
+import { useOutletContext } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./FeaturedItems.module.css";
 import ProductCard from "../ProductCard";
-import { useOutletContext } from "react-router-dom";
 
-const FeaturedItems = () => {
+const FeaturedItems = ({ itemIds = [] }) => {
   const { data } = useOutletContext();
-  const featuredItemIds = [5, 8, 14, 18];
-  const featuredItems = data.filter((item) =>
-    featuredItemIds.includes(item.id)
-  );
+  const featuredItems = data.filter((item) => itemIds.includes(item.id));
 
   return (
     <div className={styles.container}>
@@ -25,6 +23,10 @@ const FeaturedItems = () => {
       </ul>
     </div>
   );
+};
+
+FeaturedItems.propTypes = {
+  itemIds: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default FeaturedItems;
