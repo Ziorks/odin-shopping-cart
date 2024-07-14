@@ -36,7 +36,7 @@ describe("ProductCard", () => {
     expect(title).toBeInTheDocument();
   });
 
-  it("should display the the price in the form '$X.XX'", () => {
+  it("should display the price in the form '$X.XX'", () => {
     render(<ProductCard product={testProduct} />, { wrapper: MemoryRouter });
 
     const price = screen.getByText(`$${testProduct.price.toFixed(2)}`);
